@@ -4,7 +4,7 @@ require_once (ROOT. '/models/Tasks.php');
 
 class MainController extends Tasks
 {
-    public function actionIndex(){
+    public function actionIndex($page){
         if (isset($_POST['user_name'])){
             $user=$_POST['user_name'];
             $email=$_POST['email'];
@@ -33,9 +33,10 @@ class MainController extends Tasks
         }else{
             $countTaskPages=$this->getCountTasks()/3+1;
         }
-        if (isset($_GET['page'])){
-            $get=(int)$_GET['page'];
-            $begin=$get*3-3;
+
+        if (isset($page)){
+            $pageNumber=(int)$page;
+            $begin=$pageNumber*3-3;
             $tasks=$this->getTasks();
             $tasks=array_slice($tasks,$begin,3);
         }

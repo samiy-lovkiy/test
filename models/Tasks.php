@@ -24,6 +24,28 @@ class Tasks
         return $tasks;
     }
 
+    public function sortTasksForEmail()
+    {
+        $tasks=$this->getTasks();
+        function cmp($a, $b)
+        {
+            return strcmp($a['email'], $b['email']);
+        }
+        usort($tasks,"cmp");
+        return $tasks;
+    }
+
+    public function sortTasksForUser()
+    {
+        $tasks=$this->getTasks();
+        function cmp($a, $b)
+        {
+            return strcmp($a['user_name'], $b['user_name']);
+        }
+        usort($tasks,"cmp");
+        return $tasks;
+    }
+
     public function createTask($user, $email, $task)
     {
         $this->connection->query("INSERT INTO tasks (user_name,email,task) values ('$user','$email','$task')");
@@ -55,6 +77,13 @@ class Tasks
     public function getCountTasks()
     {
         $count=count($this->getTasks());
+        /*if ($count%3!==0){
+            $result=$count+1;
+        }else{
+            if ($count%3==0)
+            $result=$count;
+        }
+        return $result;*/
         return $count;
     }
 

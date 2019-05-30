@@ -24,20 +24,21 @@ class Router
          //ищем $uri в routes
         foreach($this->routes as $uriPattern=>$path){
            if(preg_match("`$uriPattern`",$uri)){
-                $segment=explode('/', $path);
+                $internalRoute=preg_replace("`$uriPattern`",$path,$uri);
+                $internalRoute=trim($internalRoute,'/');
+                $segment=explode('/', $internalRoute);
                 $controllerName=array_shift($segment) . 'Controller';
                 $controllerName=ucfirst($controllerName);
-
                 $actonName='action' . ucfirst(array_shift($segment));
+                $params=$segment;
 
-                $fileController=ROOT. "/controllers/$controllerName.php";
+               $fileController=ROOT. "/controllers/$controllerName.php";
 
                 if (file_exists($fileController)){
                     include ($fileController);
                 }
-
                 $controllerObject=new $controllerName;
-               $reuslt=$controllerObject->$actonName();
+               $reuslt=call_user_func_array(array($controllerObject,$actonName),$params);
                if ($reuslt!=0){
                    break;
                }
