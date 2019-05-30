@@ -42,6 +42,26 @@ class SortController extends Tasks
             $countTaskPages = $this->getCountTasks() / 3 + 1;
         }
 
+
+        include (ROOT. '/views/index.php');
+        return true;
+    }
+
+    public function actionView($param,$param2,$page)
+    {
+        if ($param=='status'){
+            $pageNumber=(int)$page;
+            $begin=$pageNumber*3-3;
+            $tasks = $this->getTasksFromStatus($param2);
+            $tasks=array_slice($tasks,$begin,3);
+
+            $countTaskPages = count($this->getTasksFromStatus($param2)) / 3;
+            if (count($this->getTasksFromStatus($param2)) % 3 == 0) {
+                $countTaskPages = count($this->getTasksFromStatus($param2)) / 3;
+            } else {
+                $countTaskPages = count($this->getTasksFromStatus($param2)) / 3 + 1;
+            }
+        }
         include (ROOT. '/views/index.php');
         return true;
     }

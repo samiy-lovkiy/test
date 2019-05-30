@@ -55,6 +55,8 @@
                             <li class="sorting__list__item"><a href="/sort/emailup/1" class="sorting__link">Сортировать по email (z-a)</a></li>
                             <li class="sorting__list__item"><a href="/sort/usernamedown/1" class="sorting__link">Сортировать по Имени пользователя(a-z)</a></li>
                             <li class="sorting__list__item"><a href="/sort/usernameup/1" class="sorting__link">Сортировать по Имени пользователя(z-a)</a></li>
+                            <li class="sorting__list__item"><a href="/sort/status/0/1" class="sorting__link">Сортировать по Имени статусу(active)</a></li>
+                            <li class="sorting__list__item"><a href="/sort/status/1/1" class="sorting__link">Сортировать по Имени статусу(inactive)</a></li>
                         </ul>
                     </div>
                 </div>
